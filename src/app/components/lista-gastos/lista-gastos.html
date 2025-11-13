@@ -1,0 +1,8 @@
+<div class="tarjeta">
+  <h2>Lista de gastos</h2>
+  <ul>
+    <li *ngFor="let gasto of servicio.gastos()">
+      {{ gasto.nombre }} — {{ gasto.monto | currency:'PEN' }}
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,18 @@
+<div class="tarjeta">
+  <h2>Ingresar presupuesto</h2>
+  <input
+    type="number"
+    [(ngModel)]="montoTemp"
+    placeholder="Monto del presupuesto"
+  />
+  <button (click)="guardarPresupuesto()">Guardar</button>
+
+  <hr />
+  <p><strong>Presupuesto total:</strong> {{ servicio.presupuesto() | currency:'PEN' }}</p>
+  <p><strong>Total gastado:</strong> {{ servicio.totalGastos() | currency:'PEN' }}</p>
+  <p
+    [style.color]="servicio.saldoRestante() < 0 ? 'red' : 'green'"
+  >
+    <strong>Saldo restante:</strong> {{ servicio.saldoRestante() | currency:'PEN' }}
+  </p>
+</div>
