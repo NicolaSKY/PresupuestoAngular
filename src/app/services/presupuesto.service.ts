@@ -9,11 +9,9 @@ export interface Gasto {
   providedIn: 'root'
 })
 export class PresupuestoService {
-  // Señales reactivas
   presupuesto = signal<number>(0);
   gastos = signal<Gasto[]>([]);
 
-  // Cálculos automáticos
   totalGastos = computed(() =>
     this.gastos().reduce((acc, g) => acc + g.monto, 0)
   );
@@ -22,12 +20,17 @@ export class PresupuestoService {
     this.presupuesto() - this.totalGastos()
   );
 
-  // Métodos
   setPresupuesto(valor: number) {
     this.presupuesto.set(valor);
   }
 
   agregarGasto(nombre: string, monto: number) {
+
+    if (monto > this.saldoRestante()) {
+      alert("❗ No puedes agregar este gasto porque excede tu presupuesto.");
+      return;
+    }
+
     const nuevoGasto: Gasto = { nombre, monto };
     this.gastos.update(g => [...g, nuevoGasto]);
   }
